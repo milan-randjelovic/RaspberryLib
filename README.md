@@ -1,2 +1,2 @@
 # RaspberryLib
-Smple .net Raspbery PI Library.
+Smple .Net Raspbery PI Library.
