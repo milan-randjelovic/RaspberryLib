@@ -3,6 +3,7 @@ Smple .Net Raspbery PI Library.
 
 #Usage
 
+```
 //initialize raspberry device
 Raspberry.Initialize();
 
@@ -14,5 +15,5 @@ Raspberry.SetPinValue(PinCode.PIN11_GPIO_17, PinValue.High);
 
 //reads pin value
 var pinValue = Raspberry.GetPinValue(PinCode.PIN11_GPIO_17);
-
+```
 
