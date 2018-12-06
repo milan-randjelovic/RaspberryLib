@@ -1,8 +1,6 @@
 # RaspberryLib
 Smple .Net Raspbery PI Library.
 
-#Usage
-
 ```
 //initialize raspberry device
 Raspberry.Initialize();
