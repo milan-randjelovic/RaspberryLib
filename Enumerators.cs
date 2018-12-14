@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace RaspberryLib
+namespace PiSoftware.Raspberry
 {
     public class EnumeratorHelpers
     {

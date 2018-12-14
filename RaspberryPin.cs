@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RaspberryLib
+﻿namespace PiSoftware.Raspberry
 {
     public class Pin
     {

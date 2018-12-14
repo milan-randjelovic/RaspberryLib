@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RaspberryLib
+namespace PiSoftware.Raspberry
 {
     public static class Raspberry
     {
