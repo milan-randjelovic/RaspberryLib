@@ -38,7 +38,10 @@ namespace PiSoftware.Raspberry
         /// Pin value, can be high or low.
         /// </summary>
         public PinValue PinValue { get; set; }
-        public string PinvalueLabel
+         /// <summary>
+        /// Pin value label.
+        /// </summary>
+        public string PinValueLabel
         {
             get
             {

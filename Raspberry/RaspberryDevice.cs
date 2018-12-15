@@ -50,10 +50,9 @@ namespace PiSoftware.Raspberry
         {
             get
             {
-                if(!this.IsInitialized)
-                {
-                    this.Initialize();
-                }
+                if (!this.IsInitialized)
+                    throw new Exception("Raspberry device not initialized");
+
                 return this._devicePins;
             }
         }
@@ -64,10 +63,9 @@ namespace PiSoftware.Raspberry
         {
             get
             {
-                if(!this.IsInitialized)
-                {
-                    this.Initialize();
-                }
+                if (!this.IsInitialized)
+                    throw new Exception("Raspberry device not initialized");
+
                 return this._devicePins.Where(pin => RaspberyPin.IsGPIOPin(pin.PinCode)).ToList();
             }
         }
@@ -157,6 +155,9 @@ namespace PiSoftware.Raspberry
         /// <param name="pinDirection">Raspberry pin direction</param>
         public void SetPinDirection(PinCode pinCode, PinDirection pinDirection)
         {
+            if (!this.IsInitialized)
+                throw new Exception("Raspberry device not initialized");
+
             try
             {
                 string pinAddress = pinCode.ToString().Split('_').Last().Replace("0", "");
@@ -189,6 +190,9 @@ namespace PiSoftware.Raspberry
         /// <param name="pinDirection">Raspberry pin direction</param>
         public void SetPinDirection(RaspberyPin pin, PinDirection pinDirection)
         {
+            if (!this.IsInitialized)
+                throw new Exception("Raspberry device not initialized");
+
             try
             {
                 string pinAddress = pin.PinCode.ToString().Split('_').Last().Replace("0", "");
@@ -221,6 +225,9 @@ namespace PiSoftware.Raspberry
         /// <param name="pinValue">Raspberry pin value</param>
         public void SetPinValue(PinCode pinCode, PinValue pinValue)
         {
+            if (!this.IsInitialized)
+                throw new Exception("Raspberry device not initialized");
+
             try
             {
                 string pinAddress = pinCode.ToString().Split('_').Last().Replace("0", "");
@@ -253,6 +260,9 @@ namespace PiSoftware.Raspberry
         /// <param name="pinValue">Raspberry pin value</param>
         public void SetPinValue(RaspberyPin pin, PinValue pinValue)
         {
+            if (!this.IsInitialized)
+                throw new Exception("Raspberry device not initialized");
+
             try
             {
                 string pinAddress = pin.PinCode.ToString().Split('_').Last().Replace("0", "");
@@ -285,6 +295,9 @@ namespace PiSoftware.Raspberry
         /// <returns></returns>
         public PinValue GetPinValue(PinCode pinCode)
         {
+            if (!this.IsInitialized)
+                throw new Exception("Raspberry device not initialized");
+
             try
             {
                 string pinAddress = pinCode.ToString().Split('_').Last().Replace("0", "");
@@ -316,6 +329,9 @@ namespace PiSoftware.Raspberry
         /// <returns></returns>
         public PinValue GetPinValue(RaspberyPin pin)
         {
+            if (!this.IsInitialized)
+                throw new Exception("Raspberry device not initialized");
+
             try
             {
                 string pinAddress = pin.PinCode.ToString().Split('_').Last().Replace("0", "");
@@ -346,6 +362,9 @@ namespace PiSoftware.Raspberry
         /// <param name="pin">Raspberry pin</param>
         private void DisposePin(RaspberyPin pin)
         {
+            if (!this.IsInitialized)
+                throw new Exception("Raspberry device not initialized");
+
             try
             {
                 string pinAddress = pin.PinCode.ToString().Split('_').Last().Replace("0", "");
