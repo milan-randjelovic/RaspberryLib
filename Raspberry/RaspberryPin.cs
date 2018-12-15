@@ -1,3 +1,5 @@
+using System;
+
 namespace PiSoftware.Raspberry
 {
     public class RaspberyPin
@@ -9,17 +11,40 @@ namespace PiSoftware.Raspberry
         /// </summary>
         public PinCode PinCode { get; set; }
         /// <summary>
-        /// Pin name.
+        /// Pin code label.
         /// </summary>
-        public string PinName { get; set; }
+        public string PinLabel
+        {
+            get
+            {
+                return GetGPIOLabel(this.PinCode);
+            }
+        }
         /// <summary>
         /// Pin direction, can be input or output.
         /// </summary>
         public PinDirection PinDirection { get; set; }
         /// <summary>
+        /// Pin direction label.
+        /// </summary>
+        public string PinDirectionLabel
+        {
+            get
+            {
+                return Enum.GetName(typeof(PinDirection), this.PinDirection);
+            }
+        }
+        /// <summary>
         /// Pin value, can be high or low.
         /// </summary>
         public PinValue PinValue { get; set; }
+        public string PinvalueLabel
+        {
+            get
+            {
+                return Enum.GetName(typeof(PinValue), this.PinValue);
+            }
+        }
         /// <summary>
         /// Pin initialization state.
         /// </summary>
@@ -29,9 +54,29 @@ namespace PiSoftware.Raspberry
         /// </summary>
         public PinType PinType { get; }
         /// <summary>
+        /// Pin type label.
+        /// </summary>
+        public string PinTypeLabel
+        {
+            get
+            {
+                return Enum.GetName(typeof(PinType), this.PinType);
+            }
+        }
+        /// <summary>
         /// pin group.
         /// </summary>
         public PinGroup PinGroup { get; set; }
+        /// <summary>
+        /// pin group label
+        /// </summary>
+        public string PinGroupLabel
+        {
+            get
+            {
+                return Enum.GetName(typeof(PinGroup),this.PinGroup);
+            }
+        }
 
         #endregion
 
@@ -44,7 +89,6 @@ namespace PiSoftware.Raspberry
         public RaspberyPin(PinCode pinCode)
         {
             this.PinCode = pinCode;
-            this.PinName = GetGPIOName(pinCode);
             this.PinGroup = GetGPIOGroup(pinCode);
 
             if (pinCode.ToString().Contains("GPIO"))
@@ -96,33 +140,6 @@ namespace PiSoftware.Raspberry
             }
 
             return 0;
-        }
-
-        /// <summary>
-        /// Checks if pin is GPIO pin.
-        /// </summary>
-        /// <param name="pinCode"></param>
-        /// <returns></returns>
-        public static bool IsGPIOPin(PinCode pinCode)
-        {
-            return pinCode.ToString().ToUpper().Contains("GPIO");
-        }
-
-        /// <summary>
-        /// Gets pin name based on pin code.
-        /// </summary>
-        /// <param name="pinCode"></param>
-        /// <returns></returns>
-        public static string GetGPIOName(PinCode pinCode)
-        {
-            string result = "";
-            string[] parts = pinCode.ToString().Split('_');
-            parts[0] = "";
-            for (int i = 0; i < parts.Length; i++)
-            {
-                result += parts[i];
-            }
-            return result;
         }
 
         /// <summary>
@@ -179,6 +196,33 @@ namespace PiSoftware.Raspberry
             {
                 return PinGroup.GPIO;
             }
+        }
+
+        /// <summary>
+        /// Gets pin name based on pin code.
+        /// </summary>
+        /// <param name="pinCode"></param>
+        /// <returns></returns>
+        public static string GetGPIOLabel(PinCode pinCode)
+        {
+            string result = "";
+            string[] parts = pinCode.ToString().Split('_');
+            parts[0] = "";
+            for (int i = 0; i < parts.Length; i++)
+            {
+                result += parts[i];
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Checks if pin is GPIO pin.
+        /// </summary>
+        /// <param name="pinCode"></param>
+        /// <returns></returns>
+        public static bool IsGPIOPin(PinCode pinCode)
+        {
+            return pinCode.ToString().ToUpper().Contains("GPIO");
         }
 
         #endregion
