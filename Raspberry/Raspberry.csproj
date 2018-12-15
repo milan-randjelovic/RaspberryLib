@@ -10,13 +10,17 @@
     <Description>Raspberry PI Librarry</Description>
     <PackageReleaseNotes>Initial release</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
+    <Title>Raspberry</Title>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl></PackageProjectUrl>
-    <RepositoryUrl>https://github.com/milan-randjelovic/</RepositoryUrl>
+    <RepositoryUrl>https://github.com/milan-randjelovic/RaspberryLib</RepositoryUrl>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <FileVersion>1.0.1</FileVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)"/>
+    <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
   </ItemGroup>
 
 </Project>
