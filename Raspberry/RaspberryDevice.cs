@@ -149,6 +149,27 @@ namespace PiSoftware.Raspberry
         }
 
         /// <summary>
+        /// Finds pin by id, code or name
+        /// </summary>
+        /// <param name="pin"></param>
+        /// <returns></returns>
+        public RaspberyPin FindPin(string pin)
+        {
+            if (!this.IsInitialized)
+                throw new Exception("Raspberry device not initialized");
+
+            if (string.IsNullOrEmpty(pin))
+                throw new ArgumentNullException("pin");
+
+            return this.AllPins
+                .Where(p =>
+                ((int)p.PinCode).ToString() == pin ||
+                p.PinLabel == pin ||
+                p.PinCode.ToString() == pin)
+                .FirstOrDefault();
+        }
+
+        /// <summary>
         /// Sets raspbery device pin direction.
         /// </summary>
         /// <param name="pinCode">Raspberry pin code</param>

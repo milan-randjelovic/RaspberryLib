@@ -8,15 +8,15 @@
     <Authors>Milan Randjelovic</Authors>
     <Company>PiSoftware</Company>
     <Description>Raspberry PI Librarry</Description>
-    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <PackageReleaseNotes>Added find pin function</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <Title>Raspberry</Title>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/milan-randjelovic/RaspberryLib</RepositoryUrl>
-    <AssemblyVersion>1.2.0</AssemblyVersion>
-    <FileVersion>1.2.0</FileVersion>
-    <Version>1.2.0</Version>
+    <AssemblyVersion>1.2.2</AssemblyVersion>
+    <FileVersion>1.2.2</FileVersion>
+    <Version>1.2.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
