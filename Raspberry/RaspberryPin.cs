@@ -9,43 +9,43 @@ namespace PiSoftware.Raspberry
         /// <summary>
         /// Pin code.
         /// </summary>
-        public PinCode PinCode { get; set; }
+        public PinCode Code { get; set; }
         /// <summary>
         /// Pin code label.
         /// </summary>
-        public string PinLabel
+        public string Label
         {
             get
             {
-                return GetGPIOLabel(this.PinCode);
+                return GetGPIOLabel(this.Code);
             }
         }
         /// <summary>
         /// Pin direction, can be input or output.
         /// </summary>
-        public PinDirection PinDirection { get; set; }
+        public PinDirection Direction { get; set; }
         /// <summary>
         /// Pin direction label.
         /// </summary>
-        public string PinDirectionLabel
+        public string DirectionLabel
         {
             get
             {
-                return Enum.GetName(typeof(PinDirection), this.PinDirection);
+                return Enum.GetName(typeof(PinDirection), this.Direction);
             }
         }
         /// <summary>
         /// Pin value, can be high or low.
         /// </summary>
-        public PinValue PinValue { get; set; }
+        public PinValue Value { get; set; }
          /// <summary>
         /// Pin value label.
         /// </summary>
-        public string PinValueLabel
+        public string ValueLabel
         {
             get
             {
-                return Enum.GetName(typeof(PinValue), this.PinValue);
+                return Enum.GetName(typeof(PinValue), this.Value);
             }
         }
         /// <summary>
@@ -55,29 +55,29 @@ namespace PiSoftware.Raspberry
         /// <summary>
         /// Pin type.
         /// </summary>
-        public PinType PinType { get; }
+        public PinType Type { get; }
         /// <summary>
         /// Pin type label.
         /// </summary>
-        public string PinTypeLabel
+        public string TypeLabel
         {
             get
             {
-                return Enum.GetName(typeof(PinType), this.PinType);
+                return Enum.GetName(typeof(PinType), this.Type);
             }
         }
         /// <summary>
         /// pin group.
         /// </summary>
-        public PinGroup PinGroup { get; set; }
+        public PinGroup Group { get; set; }
         /// <summary>
         /// pin group label
         /// </summary>
-        public string PinGroupLabel
+        public string groupLabel
         {
             get
             {
-                return Enum.GetName(typeof(PinGroup),this.PinGroup);
+                return Enum.GetName(typeof(PinGroup),this.Group);
             }
         }
 
@@ -91,35 +91,35 @@ namespace PiSoftware.Raspberry
         /// <param name="pinCode"></param>
         public RaspberyPin(PinCode pinCode)
         {
-            this.PinCode = pinCode;
-            this.PinGroup = GetGPIOGroup(pinCode);
+            this.Code = pinCode;
+            this.Group = GetGPIOGroup(pinCode);
 
             if (pinCode.ToString().Contains("GPIO"))
             {
-                this.PinType = PinType.GPIO;
-                this.PinDirection = PinDirection.Out;
-                this.PinValue = PinValue.Low;
+                this.Type = PinType.GPIO;
+                this.Direction = PinDirection.Out;
+                this.Value = PinValue.Low;
             }
             else
             if (pinCode.ToString().Contains("GND"))
             {
-                this.PinType = PinType.GND;
-                this.PinDirection = PinDirection.Out;
-                this.PinValue = PinValue.Low;
+                this.Type = PinType.GND;
+                this.Direction = PinDirection.Out;
+                this.Value = PinValue.Low;
             }
             else
             if (pinCode.ToString().Contains("3V"))
             {
-                this.PinType = PinType.POWER;
-                this.PinDirection = PinDirection.Out;
-                this.PinValue = PinValue.High;
+                this.Type = PinType.POWER;
+                this.Direction = PinDirection.Out;
+                this.Value = PinValue.High;
             }
             else
             if (pinCode.ToString().Contains("5V"))
             {
-                this.PinType = PinType.POWER;
-                this.PinDirection = PinDirection.Out;
-                this.PinValue = PinValue.High;
+                this.Type = PinType.POWER;
+                this.Direction = PinDirection.Out;
+                this.Value = PinValue.High;
             }
         }
 

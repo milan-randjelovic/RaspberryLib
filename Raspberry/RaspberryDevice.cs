@@ -66,7 +66,7 @@ namespace PiSoftware.Raspberry
                 if (!this.IsInitialized)
                     throw new Exception("Raspberry device not initialized");
 
-                return this._devicePins.Where(pin => RaspberyPin.IsGPIOPin(pin.PinCode)).ToList();
+                return this._devicePins.Where(pin => RaspberyPin.IsGPIOPin(pin.Code)).ToList();
             }
         }
 
@@ -132,15 +132,17 @@ namespace PiSoftware.Raspberry
         {
             try
             {
-                string pinAddress = pin.PinCode.ToString().Split('_').Last().Replace("0", "");
-                if (pin.PinType == PinType.GPIO)
+                string pinAddress = pin.Code.ToString().Split('_').Last().Replace("0", "");
+                if (pin.Type == PinType.GPIO)
                 {
                     if (Environment.OSVersion.Platform == PlatformID.Unix)
                     {
+                        ("echo " + pinAddress + " > /sys/class/gpio/unexport").Bash();
                         ("echo " + pinAddress + " > /sys/class/gpio/export").Bash();
+                        ("echo out > /sys/class/gpio/gpio" + pinAddress + "/direction").Bash();
                     }
                 }
-                this._devicePins.Where(p => p.PinCode == pin.PinCode).SingleOrDefault().Initialized = true;
+                this._devicePins.Where(p => p.Code == pin.Code).SingleOrDefault().Initialized = true;
             }
             catch (Exception ex)
             {
@@ -163,9 +165,9 @@ namespace PiSoftware.Raspberry
 
             return this.AllPins
                 .Where(p =>
-                ((int)p.PinCode).ToString() == pin ||
-                p.PinLabel == pin ||
-                p.PinCode.ToString() == pin)
+                ((int)p.Code).ToString() == pin ||
+                p.Label == pin ||
+                p.Code.ToString() == pin)
                 .FirstOrDefault();
         }
 
@@ -196,7 +198,7 @@ namespace PiSoftware.Raspberry
                 {
                     ("echo " + direction + " > /sys/class/gpio/gpio" + pinAddress + "/direction").Bash();
                 }
-                this._devicePins.Where(p => p.PinCode == pinCode).SingleOrDefault().PinDirection = pinDirection;
+                this._devicePins.Where(p => p.Code == pinCode).SingleOrDefault().Direction = pinDirection;
             }
             catch (Exception ex)
             {
@@ -216,7 +218,7 @@ namespace PiSoftware.Raspberry
 
             try
             {
-                string pinAddress = pin.PinCode.ToString().Split('_').Last().Replace("0", "");
+                string pinAddress = pin.Code.ToString().Split('_').Last().Replace("0", "");
                 string direction = "";
                 switch (pinDirection)
                 {
@@ -231,7 +233,7 @@ namespace PiSoftware.Raspberry
                 {
                     ("echo " + direction + " > /sys/class/gpio/gpio" + pinAddress + "/direction").Bash();
                 }
-                this._devicePins.Where(p => p.PinCode == pin.PinCode).SingleOrDefault().PinDirection = pinDirection;
+                this._devicePins.Where(p => p.Code == pin.Code).SingleOrDefault().Direction = pinDirection;
             }
             catch (Exception ex)
             {
@@ -266,7 +268,7 @@ namespace PiSoftware.Raspberry
                 {
                     ("echo " + value + " > /sys/class/gpio/gpio" + pinAddress + "/value").Bash();
                 }
-                this._devicePins.Where(p => p.PinCode == pinCode).SingleOrDefault().PinValue = pinValue;
+                this._devicePins.Where(p => p.Code == pinCode).SingleOrDefault().Value = pinValue;
             }
             catch (Exception ex)
             {
@@ -286,7 +288,7 @@ namespace PiSoftware.Raspberry
 
             try
             {
-                string pinAddress = pin.PinCode.ToString().Split('_').Last().Replace("0", "");
+                string pinAddress = pin.Code.ToString().Split('_').Last().Replace("0", "");
                 string value = "";
                 switch (pinValue)
                 {
@@ -301,7 +303,7 @@ namespace PiSoftware.Raspberry
                 {
                     ("echo " + value + " > /sys/class/gpio/gpio" + pinAddress + "/value").Bash();
                 }
-                this._devicePins.Where(p => p.PinCode == pin.PinCode).SingleOrDefault().PinValue = pinValue;
+                this._devicePins.Where(p => p.Code == pin.Code).SingleOrDefault().Value = pinValue;
             }
             catch (Exception ex)
             {
@@ -328,11 +330,11 @@ namespace PiSoftware.Raspberry
                     value = double.Parse(("cat /sys/class/gpio/gpio" + pinAddress + "/value").Bash());
                     if (value > 0)
                     {
-                        this._devicePins.Where(p => p.PinCode == pinCode).SingleOrDefault().PinValue = PinValue.High;
+                        this._devicePins.Where(p => p.Code == pinCode).SingleOrDefault().Value = PinValue.High;
                     }
                     else
                     {
-                        this._devicePins.Where(p => p.PinCode == pinCode).SingleOrDefault().PinValue = PinValue.Low;
+                        this._devicePins.Where(p => p.Code == pinCode).SingleOrDefault().Value = PinValue.Low;
                     }
                 }
             }
@@ -340,7 +342,7 @@ namespace PiSoftware.Raspberry
             {
                 throw ex;
             }
-            return this._devicePins.Where(p => p.PinCode == pinCode).SingleOrDefault().PinValue;
+            return this._devicePins.Where(p => p.Code == pinCode).SingleOrDefault().Value;
         }
 
         /// <summary>
@@ -355,7 +357,7 @@ namespace PiSoftware.Raspberry
 
             try
             {
-                string pinAddress = pin.PinCode.ToString().Split('_').Last().Replace("0", "");
+                string pinAddress = pin.Code.ToString().Split('_').Last().Replace("0", "");
                 double value = 0;
                 if (Environment.OSVersion.Platform == PlatformID.Unix)
                 {
@@ -363,18 +365,18 @@ namespace PiSoftware.Raspberry
                 }
                 if (value > 0)
                 {
-                    this._devicePins.Where(p => p.PinCode == pin.PinCode).SingleOrDefault().PinValue = PinValue.High;
+                    this._devicePins.Where(p => p.Code == pin.Code).SingleOrDefault().Value = PinValue.High;
                 }
                 else
                 {
-                    this._devicePins.Where(p => p.PinCode == pin.PinCode).SingleOrDefault().PinValue = PinValue.Low;
+                    this._devicePins.Where(p => p.Code == pin.Code).SingleOrDefault().Value = PinValue.Low;
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return this._devicePins.Where(p => p.PinCode == pin.PinCode).SingleOrDefault().PinValue;
+            return this._devicePins.Where(p => p.Code == pin.Code).SingleOrDefault().Value;
         }
 
         /// <summary>
@@ -388,15 +390,15 @@ namespace PiSoftware.Raspberry
 
             try
             {
-                string pinAddress = pin.PinCode.ToString().Split('_').Last().Replace("0", "");
-                if (pin.PinType == PinType.GPIO)
+                string pinAddress = pin.Code.ToString().Split('_').Last().Replace("0", "");
+                if (pin.Type == PinType.GPIO)
                 {
                     if (Environment.OSVersion.Platform == PlatformID.Unix)
                     {
                         ("echo " + pinAddress + " > /sys/class/gpio/unexport").Bash();
                     }
                 }
-                this._devicePins.Where(p => p.PinCode == pin.PinCode).SingleOrDefault().Initialized = false;
+                this._devicePins.Where(p => p.Code == pin.Code).SingleOrDefault().Initialized = false;
             }
             catch (Exception ex)
             {
