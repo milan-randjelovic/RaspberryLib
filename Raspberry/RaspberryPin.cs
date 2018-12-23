@@ -38,7 +38,7 @@ namespace PiSoftware.Raspberry
         /// Pin value, can be high or low.
         /// </summary>
         public PinValue Value { get; set; }
-         /// <summary>
+        /// <summary>
         /// Pin value label.
         /// </summary>
         public string ValueLabel
@@ -77,7 +77,7 @@ namespace PiSoftware.Raspberry
         {
             get
             {
-                return Enum.GetName(typeof(PinGroup),this.Group);
+                return Enum.GetName(typeof(PinGroup), this.Group);
             }
         }
 
@@ -158,8 +158,6 @@ namespace PiSoftware.Raspberry
                 {
                     case PinCode.PIN3_GPIO_02:
                     case PinCode.PIN5_GPIO_03:
-                    case PinCode.PIN27_IDSD:
-                    case PinCode.PIN28_IDSC:
                         return PinGroup.I2C;
 
                     case PinCode.PIN8_GPIO_14:
@@ -194,6 +192,11 @@ namespace PiSoftware.Raspberry
             if (pinCode.ToString().Contains("5V"))
             {
                 return PinGroup.V5;
+            }
+            else
+            if (pinCode.ToString().Contains("ID"))
+            {
+                return PinGroup.I2C;
             }
             else
             {

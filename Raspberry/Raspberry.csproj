@@ -8,15 +8,15 @@
     <Authors>Milan Randjelovic</Authors>
     <Company>PiSoftware</Company>
     <Description>Raspberry PI Librarry</Description>
-    <PackageReleaseNotes>Improved initialization</PackageReleaseNotes>
+    <PackageReleaseNotes>Important bug fixes</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <Title>Raspberry</Title>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/milan-randjelovic/RaspberryLib</RepositoryUrl>
-    <AssemblyVersion>1.2.3</AssemblyVersion>
-    <FileVersion>1.2.3</FileVersion>
-    <Version>1.2.3</Version>
+    <AssemblyVersion>1.2.4</AssemblyVersion>
+    <FileVersion>1.2.4</FileVersion>
+    <Version>1.2.4</Version>
   </PropertyGroup>
 
   <ItemGroup>

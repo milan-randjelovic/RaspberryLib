@@ -181,6 +181,9 @@ namespace PiSoftware.Raspberry
             if (!this.IsInitialized)
                 throw new Exception("Raspberry device not initialized");
 
+            if (!RaspberyPin.IsGPIOPin(pinCode))
+                throw new Exception("Can not set pin direction to non GPIO pin");
+
             try
             {
                 string pinAddress = pinCode.ToString().Split('_').Last().Replace("0", "");
@@ -215,6 +218,9 @@ namespace PiSoftware.Raspberry
         {
             if (!this.IsInitialized)
                 throw new Exception("Raspberry device not initialized");
+
+            if (!RaspberyPin.IsGPIOPin(pin.Code))
+                throw new Exception("Can not set pin direction to non GPIO pin");
 
             try
             {
@@ -251,6 +257,9 @@ namespace PiSoftware.Raspberry
             if (!this.IsInitialized)
                 throw new Exception("Raspberry device not initialized");
 
+            if (!RaspberyPin.IsGPIOPin(pinCode))
+                throw new Exception("Can not set pin value to non GPIO pin");
+
             try
             {
                 string pinAddress = pinCode.ToString().Split('_').Last().Replace("0", "");
@@ -285,6 +294,9 @@ namespace PiSoftware.Raspberry
         {
             if (!this.IsInitialized)
                 throw new Exception("Raspberry device not initialized");
+
+            if (!RaspberyPin.IsGPIOPin(pin.Code))
+                throw new Exception("Can not set pin value to non GPIO pin");
 
             try
             {
